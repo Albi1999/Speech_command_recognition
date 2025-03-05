@@ -1,0 +1,98 @@
+Project B1 “Speech recognition”
+
+Reference papers:
+- [Sainath15] Tara N. Sainath, Carolina Parada, Convolutional Neural Networks for Small-footprint Keyword Spotting, 
+    INTERSPEECH, Dresden, Germany, September 2015.
+- [Warden18] Pete Warden, Speech Commands: A Dataset for Limited-Vocabulary Speech Recognition, 
+    arXiv:1804.03209, April 2018.
+https://arxiv.org/abs/1804.03209
+
+• The authors are from Google Inc.
+• Reference dataset released by Google [Warden18]
+
+Dataset description:
+• Reference dataset for small-footprint keyword spotting (KWS)
+• Released in August 2017
+• 65,000 one-second-long utterances of 30 words
+• by thousands of different people
+• released under creative commons 4.0 license
+• collected by AIY (https://aiyprojects.withgoogle.com/)
+
+Google blog
+https://ai.googleblog.com/2017/08/launching-speech-commands-dataset.html
+
+Speech dataset (2.11 GB uncompressed)
+http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz
+
+Approaches for implementing a KWS engine
+• LVCSR based KWS - This approach uses a two-stage process. In the
+    first stage, the transcription of the speech into words is done using a
+    Large Vocabulary Continuous Speech Recognition (LVCSR) engine,
+    outputting formatted text. In the second stage, a textual search for the
+    key-words within the text is performed. Using this approach, results
+    from LVCSR and the text search are combined to spot the key-words
+• Phoneme Recognition based KWS - This approach also uses a two-
+    stage process. In the first stage, the speech is transformed to a
+    sequence of phonemes. In the second stage, the application searches
+    for phonetically transcribed key-words in the phoneme sequence
+    obtained from the first stage
+• Word Recognition based KWS [Sainath15] - This approach searches
+    for the key-words in a one stage operation. The recognition is
+    phoneme-based and the KWS engine looks for the keyword in the
+    speech stream based on a target sequence of phonemes representing
+    the key-word
+
+CNN model from [Sainath15]
+Features are obtained from raw audio data
+40-dimensional log Mel filterbanks coefficients
+    • audio frame length 25 ms
+    • with a 10 ms time shift
+At every new audio frame:
+    • Feature vector is obtained
+    • And stacked with 23 frames to the left and 8 to the right (32 frames total)
+    • This returns 32 frames at a time, spanning over 31 x 10 ms + 25 ms = 0.335 s
+A Convolutional Neural Network (CNN) is used to detect words
+Input to the CNN is a matrix of size t x n = 32 x 40 = 1,280 elements
+    t represents the number of elements in time (number of audio frames)
+    n represents the number of elements in the frequency domain (Mel features)
+
+
+CNN model from [Sainath15]
+27-44% improvement for KWS with respect to traditional neural networks
+The paper focus is on:
+    • Devising CNN architectures with small memory footprint
+    • Playing with CNN parameters (number of kernels, strides, pooling, etc.)
+
+
+Possible project developments:
+• Experiment with different audio features
+    • Type of coefficients (e.g., discrete Wavelet transform)
+    • Design of Mel filterbanks
+• Play with a standard/deep CNN using
+    • dropout, regularization
+• Investigate recent/new ANN architectures
+    • Autoencoder-based (CNN/RNN autoencoder + following SVM)
+    • Attention mechanism and/or inception-based CNN networks
+    • Comparison of different architectures: memory vs accuracy
+
+
+Useful resources
+
+Recent developments
+
+[Chorowski15] J. K. Chorowski, D. Bahdanau, D. Serdyuk, K. Cho, Y. Bengio,
+Attention-Based Models for Speech Recognition, Conference on Neural
+Information and Processing Systems (NIPS), Montréal, Canada, 2015.
+
+[Tang18] R. Tang and J. Lin, Deep residual learning for small-footprint keyword
+spotting, in IEEE ICASSP, Calgary, Alberta, Canada, 2018.
+
+[Andrade18] D. C. de Andrade, S. Leo, M. L. D. S. Viana, and C. Bernkopf, A
+neural attention model for speech command recognition, arXiv:1808.08929,
+2018. https://arxiv.org/pdf/1808.08929.pdf
+
+White Paper: “Key-Word Spotting - The Base Technology for Speech Analytics”
+https://pdfs.semanticscholar.org/e736/bc0a0cf1f2d867283343faf63211aef8a10c.pdf
+
+Example code:
+https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/speech_commands/

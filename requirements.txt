@@ -1,3 +1,9 @@
 os
 re
 hashlib
+librosa
+numpy
+tensorflow
+scipy
+tqdm
+matplotlib

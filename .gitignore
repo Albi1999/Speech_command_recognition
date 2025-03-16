@@ -1,3 +1,4 @@
 venv/
 Data/speech_commands_v0.02.tar.gz
 Data/speech_commands_v0.02/
+Data/processed_dataset/

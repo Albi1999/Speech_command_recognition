@@ -35,7 +35,8 @@ class SpeechPreprocessor:
         os.makedirs(f"{self.output_path}/test", exist_ok=True)
 
     def _get_spectrogram(self, filepath):
-        """Converts a .wav file into a log Mel spectrogram.
+        """
+        Converts a .wav file into a log Mel spectrogram.
         
         Args:
             filepath (str): Path to the .wav file.
@@ -44,13 +45,15 @@ class SpeechPreprocessor:
             np.ndarray: Log Mel spectrogram of the audio file.
         """
         y, sr = librosa.load(filepath, sr=self.sample_rate)
+        # Compute spectrogram
         spectrogram = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=self.n_mels, 
                                                      hop_length=int(self.frame_step * sr),
                                                      n_fft=int(self.frame_size * sr))
         return librosa.power_to_db(spectrogram, ref=np.max)
 
     def process_audio_files(self):
-        """Processes all audio files and applies dataset partitioning.
+        """
+        Processes all audio files and applies dataset partitioning.
         The processed spectrograms are saved in the output directory.
         The dataset partitioning is done using the official method from the dataset.
         The processed dataset will have the following structure:
@@ -75,6 +78,7 @@ class SpeechPreprocessor:
 
         for label in tqdm(os.listdir(self.dataset_path)):
             label_path = os.path.join(self.dataset_path, label)
+            # Skip if the path is not a directory or the label is _background_noise_
             if not os.path.isdir(label_path) or label == "_background_noise_":
                 continue
 
@@ -108,7 +112,6 @@ class SpeechPreprocessor:
         print("Data processing complete!")
 
     def visualize_random_sample(self):
-        """Visualizes a random spectrogram from the processed dataset."""
         sample_class = random.choice(os.listdir(f"{self.output_path}/train"))
         sample_file = random.choice(os.listdir(f"{self.output_path}/train/{sample_class}"))
 

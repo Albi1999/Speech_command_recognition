@@ -5,7 +5,8 @@ import hashlib
 MAX_NUM_WAVS_PER_CLASS = 2**27 - 1  # ~134M
 
 def which_set(filename, validation_percentage, testing_percentage):
-  """Determines which data partition the file should belong to.
+  """
+  Determines which data partition the file should belong to.
 
   We want to keep files in the same training, validation, or testing sets even
   if new ones are added over time. This makes it less likely that testing

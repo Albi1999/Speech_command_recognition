@@ -124,3 +124,21 @@ class SpeechPreprocessor:
         plt.colorbar(format="%+2.0f dB")
         plt.title(f"Spectrogram of {sample_file}")
         plt.show()
+
+'''
+def main():
+    # Path to the dataset
+    raw_data_dir = "Data/speech_commands_v0.02"  # Raw dataset path
+
+    # Create the preprocessor instance
+    processor = SpeechPreprocessor(raw_data_dir)
+
+    # Process all audio files
+    processor.process_audio_files()
+
+    # Visualize a sample spectrogram
+    processor.visualize_random_sample()
+
+if __name__ == '__main__':
+    main()'
+'''

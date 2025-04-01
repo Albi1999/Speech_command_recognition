@@ -1,7 +1,7 @@
 import tensorflow as tf
 from keras import layers, models
 
-def baseline_cnn(input_shape=(32, 40, 1), num_classes=35):
+def baseline_cnn(input_shape=(40, 101, 1), num_classes=35):
     """
     Baseline CNN
 

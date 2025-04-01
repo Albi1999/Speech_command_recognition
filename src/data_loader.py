@@ -2,7 +2,7 @@ import os
 import numpy as np
 import tensorflow as tf
 
-def load_dataset(split_path, label_to_index, input_shape=(32, 40), shuffle=True):
+def load_dataset(split_path, label_to_index, input_shape=(40, 101), shuffle=True):
     """
     Loads a dataset split (train/val/test) from .npy spectrograms.
 
@@ -32,16 +32,23 @@ def load_dataset(split_path, label_to_index, input_shape=(32, 40), shuffle=True)
 
             # Ensure shape matches
             if spectrogram.shape != input_shape:
+                print(f"Skipping {file_path} due to shape mismatch: {spectrogram.shape}")
                 continue
 
             data.append(spectrogram)
             labels.append(label_to_index[label])
 
-    data = np.array(data)[..., np.newaxis]  # Add channel dimension
+    if len(data) == 0:
+        print(f"No samples found in {split_path}. Returning empty dataset.")
+        return tf.data.Dataset.from_tensor_slices(([], []))
+
+    data = np.array(data)[..., np.newaxis]  # Add channel dim
     labels = np.array(labels)
 
-    # Create tf.data.Dataset
+    print(f"Loaded {len(data)} samples from {split_path}")
+
     dataset = tf.data.Dataset.from_tensor_slices((data, labels))
     if shuffle:
         dataset = dataset.shuffle(buffer_size=len(data))
+
     return dataset

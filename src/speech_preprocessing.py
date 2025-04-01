@@ -45,11 +45,24 @@ class SpeechPreprocessor:
             np.ndarray: Log Mel spectrogram of the audio file.
         """
         y, sr = librosa.load(filepath, sr=self.sample_rate)
-        # Compute spectrogram
-        spectrogram = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=self.n_mels, 
-                                                     hop_length=int(self.frame_step * sr),
-                                                     n_fft=int(self.frame_size * sr))
-        return librosa.power_to_db(spectrogram, ref=np.max)
+
+        spectrogram = librosa.feature.melspectrogram(
+            y=y, sr=sr, n_mels=self.n_mels,
+            hop_length=int(self.frame_step * sr),
+            n_fft=int(self.frame_size * sr)
+        )
+        spectrogram = librosa.power_to_db(spectrogram, ref=np.max)
+
+        # Pad or truncate to fixed width
+        target_width = 101
+        if spectrogram.shape[1] < target_width:
+            pad_width = target_width - spectrogram.shape[1]
+            spectrogram = np.pad(spectrogram, ((0, 0), (0, pad_width)), mode="constant")
+        elif spectrogram.shape[1] > target_width:
+            spectrogram = spectrogram[:, :target_width]
+
+        return spectrogram
+
 
     def process_audio_files(self):
         """
@@ -125,8 +138,8 @@ class SpeechPreprocessor:
         plt.title(f"Spectrogram of {sample_file}")
         plt.show()
 
-'''
-def main():
+
+def preprocess():
     # Path to the dataset
     raw_data_dir = "Data/speech_commands_v0.02"  # Raw dataset path
 
@@ -140,5 +153,4 @@ def main():
     processor.visualize_random_sample()
 
 if __name__ == '__main__':
-    main()'
-'''
+    preprocess()

@@ -1,0 +1,17 @@
+{
+    "model_name": "residual_cnn",
+    "epochs": 20,
+    "final_train_acc": 0.9627,
+    "final_val_acc": 0.9469,
+    "input_shape": [
+        null,
+        40,
+        101,
+        1
+    ],
+    "output_shape": [
+        null,
+        35
+    ],
+    "num_params": 313315
+}

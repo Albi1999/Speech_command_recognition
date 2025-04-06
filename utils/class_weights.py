@@ -40,3 +40,21 @@ def get_class_weights(dataset_path, exclude_dirs=["_background_noise_"]):
     class_weights = {label_to_index[class_names[i]]: weights[i] for i in range(len(class_names))}
 
     return class_weights, label_to_index, index_to_label
+
+
+if __name__ == "__main__":
+    import pickle
+
+    # Example usage
+    dataset_path = "Data/speech_commands_v0.02"  # Path to the dataset
+    exclude_dirs = ["_background_noise_"]  # Directories to exclude (e.g., background noise)
+
+    class_weights, label_to_index, index_to_label = get_class_weights(dataset_path, exclude_dirs)
+
+    # Save class weights and mappings
+    with open("class_weights.pkl", "wb") as f:
+        pickle.dump(class_weights, f)
+    with open("label_to_index.pkl", "wb") as f:
+        pickle.dump(label_to_index, f)
+    with open("index_to_label.pkl", "wb") as f:
+        pickle.dump(index_to_label, f)

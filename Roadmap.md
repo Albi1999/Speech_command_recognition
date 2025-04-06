@@ -25,7 +25,7 @@ Once the baseline is working, experiment with:
 
 ### CNN-Based
 
-- Residual CNN (ResNet block)
+- [x] Residual CNN (ResNet block)
 - Inception-style convolutions (as suggested in the course guidelines)
 
 ### RNN-Based

@@ -1,0 +1,17 @@
+{
+    "model_name": "baseline_cnn",
+    "epochs": 20,
+    "final_train_acc": 0.6937,
+    "final_val_acc": 0.8105,
+    "input_shape": [
+        null,
+        40,
+        101,
+        1
+    ],
+    "output_shape": [
+        null,
+        35
+    ],
+    "num_params": 7101731
+}

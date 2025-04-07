@@ -15,7 +15,7 @@
 - Architecture: 2-3 convolutional layers + fully connected layers
 - Output: multi-class classification
 
-This will serve as your **reference baseline** to compare more advanced models.
+This will serve as **reference baseline** to compare more advanced models.
 
 ---
 
@@ -30,7 +30,7 @@ Once the baseline is working, experiment with:
 
 ### RNN-Based
 
-- CNN + BiLSTM to capture temporal dynamics (preferred)
+- [x] CNN + BiLSTM to capture temporal dynamics (preferred)
 - CNN + GRU
 
 ### Transformer-Based

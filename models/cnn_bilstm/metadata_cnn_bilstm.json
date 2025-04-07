@@ -1,0 +1,17 @@
+{
+    "model_name": "cnn_bilstm",
+    "epochs": 20,
+    "final_train_acc": 0.8896,
+    "final_val_acc": 0.8748,
+    "input_shape": [
+        null,
+        40,
+        101,
+        1
+    ],
+    "output_shape": [
+        null,
+        35
+    ],
+    "num_params": 87523
+}

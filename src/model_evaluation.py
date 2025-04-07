@@ -98,12 +98,18 @@ class ModelEvaluator:
             with open(metadata_path, "r") as f:
                 metadata = json.load(f)
 
+            # Get model size in MB
+            model_size_bytes = os.path.getsize(model_path)
+            model_size_mb = round(model_size_bytes / (1024 * 1024), 2)
+
+            # Update metadata with evaluation metrics
             metadata.update({
                 "accuracy": acc,
                 "precision": precision,
                 "recall": recall,
                 "f1_macro": f1_macro,
                 "f1_weighted": f1_weighted,
+                "model_size_MB": model_size_mb,
             })
 
             self.models_info.append(metadata)

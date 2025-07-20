@@ -11,7 +11,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 class SpeechPreprocessor:
     def __init__(self, dataset_path, output_path="Data/processed_dataset",
                  sample_rate=16000, n_mels=40, frame_size=0.025, frame_step=0.010,
-                 noise_prob=0.4):
+                 noise_prob=0.3):
         """
         Initializes the SpeechPreprocessor class.
 
@@ -53,6 +53,50 @@ class SpeechPreprocessor:
                 noises.append(y)
         return noises
 
+    def _time_shift(self, audio, shift_max=0.1):
+        """
+        Applies a random time shift to the audio signal.
+        Args:
+            audio (np.ndarray): Audio signal to be shifted.
+            shift_max (float): Maximum shift in seconds.
+        Returns:
+            np.ndarray: Time-shifted audio signal.
+        """
+        shift = int(random.uniform(-shift_max, shift_max) * self.sample_rate)
+        if shift > 0:
+            audio = np.pad(audio, (shift, 0), mode='constant')[:len(audio)]
+        elif shift < 0:
+            audio = np.pad(audio, (0, -shift), mode='constant')[-shift:]
+        return audio
+    
+    def _spec_augment(self, spectrogram, freq_mask_param=3, time_mask_param=8):
+        """
+        Applies SpecAugment to the spectrogram.
+        Args:
+            spectrogram (np.ndarray): Input spectrogram.
+            freq_mask_param (int): Maximum frequency mask size.
+            time_mask_param (int): Maximum time mask size.
+        Returns:
+            np.ndarray: Augmented spectrogram.
+        """
+        spec = np.copy(spectrogram)
+        num_mel_channels = spec.shape[0]
+        num_time_steps = spec.shape[1]
+
+        # Frequency masking
+        for _ in range(1):
+            f = random.randint(0, freq_mask_param)
+            f0 = random.randint(0, num_mel_channels - f)
+            spec[f0:f0 + f, :] = 0
+
+        # Time masking
+        for _ in range(1):
+            t = random.randint(0, time_mask_param)
+            t0 = random.randint(0, num_time_steps - t)
+            spec[:, t0:t0 + t] = 0
+
+        return spec
+
     def _add_noise(self, audio):
         """
         Adds random background noise to the audio signal.
@@ -76,7 +120,8 @@ class SpeechPreprocessor:
         noise_level = random.uniform(0.1, 0.4)
         return audio + noise_level * noise
 
-    def _get_spectrogram(self, filepath, add_noise=False):
+    def _get_spectrogram(self, filepath, add_noise=False, apply_time_shift=False, apply_spec_augment=False,
+                        time_shift_prob=0.5, spec_augment_prob=0.5):
         """
         Converts a .wav file into a log Mel spectrogram.
         
@@ -88,6 +133,10 @@ class SpeechPreprocessor:
             np.ndarray: Log Mel spectrogram of the audio file.
         """
         y, sr = librosa.load(filepath, sr=self.sample_rate)
+
+        if apply_time_shift and random.random() < time_shift_prob:
+            y = self._time_shift(y)
+
         if add_noise:
             y = self._add_noise(y)
 
@@ -97,6 +146,9 @@ class SpeechPreprocessor:
             n_fft=int(self.frame_size * sr)
         )
         spectrogram = librosa.power_to_db(spectrogram, ref=np.max)
+
+        if apply_spec_augment and random.random() < spec_augment_prob:
+            spectrogram = self._spec_augment(spectrogram)
 
         # Pad or truncate to fixed width
         target_width = 101
@@ -130,11 +182,14 @@ class SpeechPreprocessor:
             ├── class1/
             ├── class2/
             └── ...
+        Data augmentation is applied only to the training set with noise addition, time shifting and spec augment.
         """
         print("Processing audio files...")
 
         augmented_files_log = open("augmented_files_log.txt", "w")
-        augmented_count = 0
+        noise_count = 0
+        time_shift_count = 0
+        spec_augment_count = 0
 
         for label in tqdm(os.listdir(self.dataset_path)):
             label_path = os.path.join(self.dataset_path, label)
@@ -164,9 +219,14 @@ class SpeechPreprocessor:
                     continue  # Skip if the file already exists
 
                 apply_noise = is_train and (random.random() < self.noise_prob)
+                apply_time_shift = is_train and (random.random() < 0.3)
+                apply_spec_augment = is_train and (random.random() < 0.3)
 
                 # Convert to spectrogram
-                spectrogram = self._get_spectrogram(filepath, apply_noise)
+                spectrogram = self._get_spectrogram(
+                    filepath, apply_noise, is_train, is_train,
+                    time_shift_prob=0.3, spec_augment_prob=0.3
+                )
 
                 # Normalize
                 spectrogram = (spectrogram - np.mean(spectrogram)) / np.std(spectrogram)
@@ -174,10 +234,14 @@ class SpeechPreprocessor:
                 # Save spectrogram
                 np.save(output_file, spectrogram)
 
-                # Log the augmented files if noise was added
+                # Log the augmented files
                 if apply_noise:
                     augmented_files_log.write(f"{output_file}\n")
-                    augmented_count += 1
+                    noise_count += 1
+                if apply_time_shift:
+                    time_shift_count += 1
+                if apply_spec_augment:
+                    spec_augment_count += 1
 
         augmented_files_log.close()
         print("Data processing complete!")
@@ -195,11 +259,16 @@ class SpeechPreprocessor:
         )
 
         if total_processed > 0:
-            print(f"Total samples processed: {total_processed}")
-            print(f"Samples with noise: {augmented_count} ({(augmented_count / total_processed) * 100:.2f}%)")
+            print(f"\nSummary of Preprocessing:")
+            print(f"- Total samples processed: {total_processed}")
 
         if train_total > 0:
-            print(f"Samples with noise over training set only: {augmented_count}/{train_total} ({(augmented_count / train_total) * 100:.2f}%)")
+            print(f"- Total training samples: {train_total}")
+            print(f"- Training samples with noise: {noise_count} ({(noise_count / train_total) * 100:.2f}%)")
+            print(f"- Training samples with time shift: {time_shift_count} ({(time_shift_count / train_total) * 100:.2f}%)")
+            print(f"- Training samples with SpecAugment: {spec_augment_count} ({(spec_augment_count / train_total) * 100:.2f}%)\n")
+
+
 
     def visualize_random_sample(self):
         sample_class = random.choice(os.listdir(f"{self.output_path}/train"))

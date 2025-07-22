@@ -7,6 +7,10 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 from .partitioning import which_set
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+SEED = 42
+np.random.seed(SEED)
+random.seed(SEED)
+os.environ['PYTHONHASHSEED'] = str(SEED)
 
 class SpeechPreprocessor:
     def __init__(self, dataset_path, output_path="Data/processed_dataset",

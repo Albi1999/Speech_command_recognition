@@ -1,14 +1,6 @@
 # Roadmap
 
-## **1. Clear Task Definition**
-
-- [x]  Choose which commands to classify: for example, the standard 10 keywords (`yes`, `no`, `up`, `down`, etc.), possibly including `unknown` and `silence`.
-- We use the full dataset even if it is more complex and heavy.
-- [x]  Check class balance and consider data balancing techniques if necessary.
-
----
-
-## **2. Initial Modeling (Baseline)**
+## **1. Initial Modeling (Baseline)**
 
 - [x]  Implement a **basic CNN model**, inspired by [Sainath15](docs\CNN_interspeech.pdf):
 - Input: 40x101 log-Mel spectrogram (already prepared)
@@ -19,7 +11,7 @@ This will serve as **reference baseline** to compare more advanced models.
 
 ---
 
-## **3. Experimentation with Advanced Architectures**
+## **2. Experimentation with Advanced Architectures**
 
 Once the baseline is working, experiment with:
 
@@ -46,7 +38,7 @@ Once the baseline is working, experiment with:
 
 ---
 
-## **4. Optimization for Edge Devices**
+## **3. Optimization for Edge Devices**
 
 Once I have 5–6 models evaluated for pure performance (accuracy, loss), explore model compression techniques:
 
@@ -63,7 +55,7 @@ Once I have 5–6 models evaluated for pure performance (accuracy, loss), explor
 
 ---
 
-## **5. Evaluation and Visualization**
+## **6. Evaluation and Visualization**
 
 - Metrics: Accuracy, Precision, Recall, F1 Score
 - Confusion matrix
@@ -72,7 +64,14 @@ Once I have 5–6 models evaluated for pure performance (accuracy, loss), explor
 
 ---
 
-## **6. Report and Presentation**
+## **7. Android Application**
+
+- Write a simple Android app to run inference on the best trained model
+- So I can show it tho the professor as a demonstration of the model's practical application
+
+---
+
+## **8. Report and Presentation**
 
 - Write the report in LaTeX (use the Moodle template)
 - Include:
@@ -83,7 +82,7 @@ Once I have 5–6 models evaluated for pure performance (accuracy, loss), explor
 
 ---
 
-### Bonus Ideas (optional but valuable)
+### Other Ideas for Advanced Models
 
 - Use an autoencoder for feature extraction (use bottleneck vectors for classification)
 - Train on raw audio using WaveNet-style convolutions

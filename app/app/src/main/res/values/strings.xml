@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">DemoAppMLHD</string>
+    <string name="demo_speech_command_recognition">Demo Speech Command Recognition</string>
+    <string name="press_start_recognition_to_begin">Press \'START RECOGNITION\' to begin.</string>
+    <string name="result_will_be_displayed_here">Result will be displayed here…</string>
+    <string name="start_recognition">START RECOGNITION</string>
+    <string name="stop_recognizing">Stop Recognition</string>
+    <string name="listening">Listening…</string>
+    <string name="failed_recognition">No commands detected. Please try again.</string>
 </resources>

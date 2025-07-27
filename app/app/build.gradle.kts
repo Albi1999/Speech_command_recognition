@@ -34,12 +34,17 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
+    aaptOptions {
+        noCompress("tflite")
+    }
+    packagingOptions {
+        pickFirst("**/libc++_shared.so")
     }
 }
 
 dependencies {
+    implementation(libs.mediapipe.tasks.audio)
+    implementation(libs.mediapipe.tasks.core)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -56,4 +61,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.android.material)
+    implementation(libs.androidx.constraintlayout)
 }

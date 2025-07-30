@@ -43,8 +43,8 @@ android {
 }
 
 dependencies {
-    implementation(libs.mediapipe.tasks.audio)
-    implementation(libs.mediapipe.tasks.core)
+//    implementation(libs.mediapipe.tasks.audio)
+//    implementation(libs.mediapipe.tasks.core)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -64,4 +64,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.android.material)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.support)
+    implementation("com.github.st-h:TarsosDSP:2.4.1")
 }

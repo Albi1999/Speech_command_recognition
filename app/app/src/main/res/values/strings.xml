@@ -7,4 +7,5 @@
     <string name="stop_recognizing">Stop Recognition</string>
     <string name="listening">Listening…</string>
     <string name="failed_recognition">No commands detected. Please try again.</string>
+    <string name="processing">Processing…</string>
 </resources>

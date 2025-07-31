@@ -1,0 +1,17 @@
+{
+    "model_name": "residual_attention_gan",
+    "epochs_trained": 16,
+    "best_train_acc": 0.975,
+    "best_val_acc": 0.9562,
+    "input_shape": [
+        null,
+        40,
+        101,
+        1
+    ],
+    "output_shape": [
+        null,
+        35
+    ],
+    "num_params": 764643
+}

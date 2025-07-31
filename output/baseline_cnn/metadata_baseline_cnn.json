@@ -1,0 +1,17 @@
+{
+    "model_name": "baseline_cnn",
+    "epochs_trained": 7,
+    "best_train_acc": 0.0285,
+    "best_val_acc": 0.0407,
+    "input_shape": [
+        null,
+        40,
+        101,
+        1
+    ],
+    "output_shape": [
+        null,
+        35
+    ],
+    "num_params": 7101731
+}

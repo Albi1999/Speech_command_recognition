@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo_unipd.png" alt="" height="70"/>
+</p>
+
 # Speech Command Recognition: A Deep Learning Approach
 
 </div>

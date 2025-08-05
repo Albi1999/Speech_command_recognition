@@ -1,8 +1,8 @@
 {
     "model_name": "residual_cnn",
-    "epochs_trained": 14,
-    "best_train_acc": 0.9287,
-    "best_val_acc": 0.9446,
+    "epochs_trained": 19,
+    "best_train_acc": 0.9617,
+    "best_val_acc": 0.9584,
     "input_shape": [
         null,
         40,

@@ -1,8 +1,8 @@
 {
     "model_name": "cnn_bilstm",
-    "epochs_trained": 20,
-    "best_train_acc": 0.8606,
-    "best_val_acc": 0.8757,
+    "epochs_trained": 16,
+    "best_train_acc": 0.9456,
+    "best_val_acc": 0.9497,
     "input_shape": [
         null,
         40,
@@ -13,5 +13,5 @@
         null,
         35
     ],
-    "num_params": 87523
+    "num_params": 148899
 }

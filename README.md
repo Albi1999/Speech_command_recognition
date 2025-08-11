@@ -56,13 +56,13 @@ This repository contains the project for the "Machine Learning for Human Data" c
 
 ## Project Overview
 
-This work presents a systematic and comparative study of diverse deep learning paradigms for KWS on the **Google Speech Commands V2** dataset. The analysis extends beyond mere accuracy, considering a holistic set of metrics—including F1-score, number of parameters, model size, and inference time—to identify the architecture with the best performance-efficiency trade-off.
+This work presents a systematic and comparative study of diverse deep learning paradigms for KWS on the **Google Speech Commands V2** dataset. The analysis extends beyond mere accuracy, considering a holistic set of metrics - including F1-score, number of parameters, model size, and inference time - to identify the architecture with the best performance-efficiency trade-off.
 
 The project covers the entire machine learning lifecycle:
 1.  **Data Preprocessing:** Implementation of a complete pipeline to transform raw audio files into log-Mel spectrograms, including data augmentation techniques like Time Shifting, Noise Addition, and SpecAugment.
 2.  **Modeling:** Design and from-scratch implementation of six distinct neural network architectures.
 3.  **Rigorous Evaluation:** Creation of a unified evaluation pipeline to compare the models fairly and reproducibly.
-4.  **Deployment:** Conversion of the optimal model to the TensorFlow Lite format and its integration into a functional Android application for on-device inference.
+4.  **Deployment:** Conversion of the best model to the TensorFlow Lite format and its integration into a functional Android application for on-device inference.
 
 ## Architectures Implemented
 
@@ -71,7 +71,7 @@ A wide range of architectures was explored to compare different approaches to au
 1.  **Baseline CNN:** A simple convolutional model to establish a performance benchmark.
 2.  **Residual CNN (ResNet):** A deep architecture based on residual blocks to overcome the limitations of shallow networks.
 3.  **Hybrid CNN + BiLSTM:** A hybrid model combining the local feature extraction of CNNs with the temporal modeling capabilities of RNNs.
-4.  **Hybrid CNN + Transformer:** A state-of-the-art hybrid architecture that replaces the RNN with a Transformer encoder, leveraging the self-attention mechanism.
+4.  **Hybrid CNN + Transformer:** A hybrid architecture that replaces the RNN with a Transformer encoder, leveraging the self-attention mechanism.
 5.  **Vision Transformer (ViT):** A pure attention-based model that treats the spectrogram as a sequence of patches, discarding convolutional inductive biases.
 6.  **Experimental (ResNet + SE + GAN-inspired):** A novel and original architecture that augments a ResNet backbone with a Squeeze-and-Excitation attention block and a classifier inspired by GAN discriminators.
 
@@ -93,8 +93,7 @@ The project is designed to be run on **Kaggle** to leverage free GPUs and simpli
 
 ### Kaggle Environment Setup
 
-1.  **Download the Dataset:** Download the dataset from the official link:
-    [Download Dataset](http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz)
+1.  **Download the Dataset:** Download the dataset from the official link: [Speech Commands V2 Download](http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz)
 
 2.  **Upload the Dataset to Kaggle:**
     -   Decompress the `tar.gz` archive.
@@ -119,24 +118,21 @@ The project is designed to be run on **Kaggle** to leverage free GPUs and simpli
 
 The `/app` directory contains an Android application written in Kotlin that demonstrates the on-device usage of the best model.
 
--   **Model Used:** `Hybrid CNN + Transformer`, selected for its excellent balance of accuracy, size, and speed.
+-   **Model Used:** `Residual Attention GAN`, selected for its excellent performance.
 -   **Functionality:** The app records audio from the microphone, preprocesses it to generate a log-Mel spectrogram, and feeds it to the TFLite model for real-time inference, displaying the predictions to the user.
 -   **How to Run:** Open the project in Android Studio and run it on an emulator or a physical device. The `.tflite` model and labels file are included in the app's `assets` folder.
 
 ## Results
 
-The comparative evaluation revealed that the experimental **Residual Attention GAN** achieved the highest accuracy (95.2%). However, when considering the trade-off with efficiency and size, the **Hybrid CNN + Transformer** (94.1% accuracy) was identified as the most balanced model and was therefore chosen for deployment.
-
 The final ranking and detailed metrics for all models are presented below:
 
-| Model                  | Accuracy (%) | F1-Score | Num. Params | Size (MB) | Inference (ms) | Final Score |
-| ------------------------ |:------------:|:--------:|:-----------:|:---------:|:--------------:|:-----------:|
-| **Hybrid CNN-Transformer** |    93.39     |  0.926   |   216,547   |   2.65    |   **0.092**    |  **0.980**  |
-| Hybrid CNN-BiLSTM        |    94.84     |  0.944   | **148,899** | **1.79**  |     0.129      |    0.933    |
-| Vision Transformer       |    84.93     |  0.840   |   164,643   |   2.03    |     0.093      |    0.913    |
-| Residual CNN             |    95.28     |  0.946   |   313,315   |   3.72    |     0.142      |    0.910    |
-| **Residual Attention GAN** | **95.62**    | **0.951**|   764,643   |   8.92    |     0.151      |    0.891    |
-| Baseline CNN             |     7.34     |  0.023   |  7,101,731  |   81.32   |     0.102      |    0.083    |
+| Model                  | Accuracy (%) | F1-Score | Num. Params | Size (MB) | Inference (ms) | Norm. Score ↑ | Rank Score ↓ |
+| ------------------------ |:------------:|:--------:|:-----------:|:---------:|:--------------:|:-------------:|:------------:|
+| **Residual Attention GAN** | **94.92**    | **0.942**|   764,643   |   8.92    |     0.149      |     0.800     |     2.70     |
+| **Residual CNN**         | **94.92**    | **0.942**|   313,315   |   3.72    |     0.141      |     0.881     |     2.70     |
+| Hybrid CNN-BiLSTM        |    94.53     |  0.938   | **148,899** | **1.79**  |     0.127      |   **0.899**   |   **2.47**   |
+| Hybrid CNN-Transformer   |    93.10     |  0.922   |   216,547   |   2.65    |   **0.092**    |     0.801     |     3.33     |
+| Vision Transformer       |    86.94     |  0.859   |   164,643   |   2.03    |     0.093      |     0.196     |     3.80     |
 
 For a detailed analysis, including trade-off plots, confusion matrices, and error analysis, please refer to the project report.
 

@@ -1,8 +1,8 @@
 {
     "model_name": "hybrid_cnn_transformer",
-    "epochs_trained": 20,
-    "best_train_acc": 0.9043,
-    "best_val_acc": 0.9362,
+    "epochs_trained": 18,
+    "best_train_acc": 0.8988,
+    "best_val_acc": 0.934,
     "input_shape": [
         null,
         40,

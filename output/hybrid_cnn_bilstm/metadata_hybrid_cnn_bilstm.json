@@ -1,0 +1,17 @@
+{
+    "model_name": "hybrid_cnn_bilstm",
+    "epochs_trained": 18,
+    "best_train_acc": 0.9483,
+    "best_val_acc": 0.9498,
+    "input_shape": [
+        null,
+        40,
+        101,
+        1
+    ],
+    "output_shape": [
+        null,
+        35
+    ],
+    "num_params": 148899
+}

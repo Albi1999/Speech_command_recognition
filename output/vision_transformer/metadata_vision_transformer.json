@@ -1,8 +1,8 @@
 {
     "model_name": "vision_transformer",
-    "epochs_trained": 18,
-    "best_train_acc": 0.758,
-    "best_val_acc": 0.8658,
+    "epochs_trained": 17,
+    "best_train_acc": 0.7823,
+    "best_val_acc": 0.8801,
     "input_shape": [
         null,
         40,

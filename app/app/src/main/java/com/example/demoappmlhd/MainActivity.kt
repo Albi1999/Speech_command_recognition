@@ -30,18 +30,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var resultsTextView: TextView
     private lateinit var startButton: Button
     private lateinit var progressBar: ProgressBar
-
     private var audioRecord: AudioRecord? = null
     private var isRecording = false
     private val sampleRate = 16000
     private val channelConfig = AudioFormat.CHANNEL_IN_MONO
     private val audioFormat = AudioFormat.ENCODING_PCM_16BIT
     private var bufferSizeInBytes = 0
-
     private lateinit var tfliteInterpreter: Interpreter
-    //private val modelPath = "model_cnn_transformer_refined_new.tflite"
-    //private val modelPath = "model_cnn_transformer_refined.tflite"
-    private val modelPath = "model_cnn_transformer.tflite"
+    private val modelPath = "model_residual_attention_gan.tflite"
     private val labelsPath = "labels.txt"
     private lateinit var labels: List<String>
 

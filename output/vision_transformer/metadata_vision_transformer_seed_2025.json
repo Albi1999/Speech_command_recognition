@@ -1,0 +1,18 @@
+{
+    "model_name": "vision_transformer",
+    "seed": 2025,
+    "epochs_trained": 19,
+    "best_train_acc": 0.7559,
+    "best_val_acc": 0.8621,
+    "input_shape": [
+        null,
+        40,
+        101,
+        1
+    ],
+    "output_shape": [
+        null,
+        35
+    ],
+    "num_params": 164643
+}

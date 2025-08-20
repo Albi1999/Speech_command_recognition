@@ -1,0 +1,18 @@
+{
+    "model_name": "hybrid_cnn_transformer",
+    "seed": 2025,
+    "epochs_trained": 20,
+    "best_train_acc": 0.9147,
+    "best_val_acc": 0.9394,
+    "input_shape": [
+        null,
+        40,
+        101,
+        1
+    ],
+    "output_shape": [
+        null,
+        35
+    ],
+    "num_params": 216547
+}

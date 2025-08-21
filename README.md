@@ -128,11 +128,12 @@ The final ranking and detailed metrics for all models are presented below:
 
 | Model                  | Accuracy (%) | F1-Score | Num. Params | Size (MB) | Inference (ms) | Norm. Score ↑ | Rank Score ↓ |
 | ------------------------ |:------------:|:--------:|:-----------:|:---------:|:--------------:|:-------------:|:------------:|
-| **Residual Attention GAN** | **95.41**    | **0.949**|   764,643   |   8.92    |     0.150      |     0.800     |     2.60     |
-| **Residual CNN**         |    95.11     |  0.945   |   313,315   |   3.72    |     0.141      |     0.858     |     2.80     |
-| Hybrid CNN-BiLSTM        |    94.92     |  0.943   | **148,899** | **1.79**  |     0.128      |   **0.889**   |   **2.47**   |
-| Hybrid CNN-Transformer   |    92.97     |  0.921   |   216,547   |   2.65    |     0.093      |     0.771     |     3.47     |
-| Vision Transformer       |    86.01     |  0.851   |   164,643   |   2.03    |   **0.092**    |     0.197     |     3.67     |
+| **Residual Attention GAN** | **95.36**    | **0.947**|   764,643   |   8.92    |     0.163      |     0.793     |     3.00     |
+| Residual CNN             |    95.08     |  0.944   |   313,315   |   3.72    |     0.153      |     0.866     |     3.20     |
+| Hybrid CNN-BiLSTM        |    94.72     |  0.916   |   148,899   |   1.79    |     0.136      |   **0.902**   |   **2.86**   |
+| Hybrid CNN-Transformer   |    93.21     |  0.924   |   216,547   |   2.65    |     0.099      |     0.881     |     3.73     |
+| Vision Transformer       |    85.06     |  0.840   |   164,643   |   2.03    |   **0.098**    |     0.568     |     3.93     |
+| Baseline CNN             |    74.99     |  0.737   | **32,035**  | **0.41**  |     0.101      |     0.202     |     4.27     |
 
 For a detailed analysis, including trade-off plots, confusion matrices, and error analysis, please refer to the project report.
 

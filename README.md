@@ -139,4 +139,7 @@ For a detailed analysis, including trade-off plots, confusion matrices, and erro
 
 ## Project Report
 
-The complete project report can be found in the `/MLHD_Report` directory. It contains an in-depth discussion of the methodology, results, and conclusions.
+The complete project report can be found here:
+</div>
+<h3><a href="MLHD_Report.pdf">MLHD_Report</a>
+</div>

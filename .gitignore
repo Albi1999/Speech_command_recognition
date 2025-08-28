@@ -92,3 +92,5 @@ Data/speech_commands_v0.02.zip
 # vscode
 .vscode/
 .vscode
+
+.DS_Store

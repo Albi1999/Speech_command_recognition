@@ -1,9 +1,9 @@
 {
     "model_name": "residual_attention_gan",
     "seed": 2025,
-    "epochs_trained": 19,
-    "best_train_acc": 0.9895,
-    "best_val_acc": 0.9579,
+    "epochs_trained": 14,
+    "best_train_acc": 0.9769,
+    "best_val_acc": 0.9578,
     "input_shape": [
         null,
         40,

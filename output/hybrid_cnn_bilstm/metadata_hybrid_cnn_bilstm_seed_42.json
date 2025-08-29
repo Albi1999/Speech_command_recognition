@@ -1,9 +1,9 @@
 {
     "model_name": "hybrid_cnn_bilstm",
     "seed": 42,
-    "epochs_trained": 18,
-    "best_train_acc": 0.9567,
-    "best_val_acc": 0.9499,
+    "epochs_trained": 19,
+    "best_train_acc": 0.9416,
+    "best_val_acc": 0.9469,
     "input_shape": [
         null,
         40,

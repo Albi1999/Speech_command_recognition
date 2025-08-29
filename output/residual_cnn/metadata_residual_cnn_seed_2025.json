@@ -1,9 +1,9 @@
 {
     "model_name": "residual_cnn",
     "seed": 2025,
-    "epochs_trained": 20,
-    "best_train_acc": 0.9632,
-    "best_val_acc": 0.9543,
+    "epochs_trained": 14,
+    "best_train_acc": 0.9426,
+    "best_val_acc": 0.955,
     "input_shape": [
         null,
         40,

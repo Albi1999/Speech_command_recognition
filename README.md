@@ -73,7 +73,7 @@ A wide range of architectures was explored to compare different approaches to au
 3.  **Hybrid CNN + BiLSTM:** A hybrid model combining the local feature extraction of CNNs with the temporal modeling capabilities of RNNs.
 4.  **Hybrid CNN + Transformer:** A hybrid architecture that replaces the RNN with a Transformer encoder, leveraging the self-attention mechanism.
 5.  **Vision Transformer (ViT):** A pure attention-based model that treats the spectrogram as a sequence of patches, discarding convolutional inductive biases.
-6.  **Experimental (ResNet + SE + GAN-inspired):** A novel and original architecture that augments a ResNet backbone with a Squeeze-and-Excitation attention block and a classifier inspired by GAN discriminators.
+6.  **Experimental (ResNet + SE + GAN-inspired Classifier):** A novel and original architecture that augments a ResNet backbone with a Squeeze-and-Excitation attention block and a classifier inspired by GAN discriminators.
 
 ## Repository Structure
 
@@ -128,7 +128,7 @@ The final ranking and detailed metrics for all models are presented below:
 
 | Model                  | Accuracy (%) | F1-Score | Num. Params | Size (MB) | Inference (ms) | Norm. Score ↑ | Rank Score ↓ |
 | ------------------------ |:------------:|:--------:|:-----------:|:---------:|:--------------:|:-------------:|:------------:|
-| **Residual Attention GAN** | **95.36**    | **0.947**|   764,643   |   8.92    |     0.163      |     0.793     |     3.00     |
+| **Experimental Model** | **95.36**    | **0.947**|   764,643   |   8.92    |     0.163      |     0.793     |     3.00     |
 | Residual CNN             |    95.08     |  0.944   |   313,315   |   3.72    |     0.153      |     0.866     |     3.20     |
 | Hybrid CNN-BiLSTM        |    94.72     |  0.916   |   148,899   |   1.79    |     0.136      |   **0.902**   |   **2.86**   |
 | Hybrid CNN-Transformer   |    93.21     |  0.924   |   216,547   |   2.65    |     0.099      |     0.881     |     3.73     |
@@ -139,7 +139,4 @@ For a detailed analysis, including trade-off plots, confusion matrices, and erro
 
 ## Project Report
 
-The complete project report can be found here:
-</div>
-<h3><a href="MLHD_Report.pdf">MLHD_Report</a>
-</div>
+The complete project report can be found here: [MLHD_Report](MLHD_Report.pdf)
